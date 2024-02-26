@@ -8,6 +8,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
@@ -62,19 +63,43 @@ fun ArithmeticScreen(){
     var resultado:String by remember{
         mutableStateOf("")
     }
-
+    var numberOneResta:Int by remember{
+        mutableStateOf(0)
+    }
+    var numberTwoResta:Int by remember{
+        mutableStateOf(0)
+    }
+    var resultadoResta:String by remember{
+        mutableStateOf("")
+    }
+    var numberOneDiv:Int by remember{
+        mutableStateOf(0)
+    }
+    var numberTwoDiv:Int by remember{
+        mutableStateOf(0)
+    }
+    var resultadoDiv:String by remember{
+        mutableStateOf("")
+    }
+    var numberOneMulti:Int by remember{
+        mutableStateOf(0)
+    }
+    var numberTwoMulti:Int by remember{
+        mutableStateOf(0)
+    }
+    var resultadoMulti:String by remember{
+        mutableStateOf("")
+    }
     Column(
         modifier = Modifier
-            .fillMaxSize()
+            //.fillMaxSize()
+            .height(3000.dp)
+            .fillMaxWidth()
             .padding(8.dp),
         horizontalAlignment = Alignment.CenterHorizontally
         ){
+        Text(text="Suma")
         TextField(value = numberOne.toString(), onValueChange ={
-            /*if (it.toIntOrNull() != null) {
-                numberOne = it.toInt()
-            }else if (TextUtils.isEmpty(it)){
-                numberOne = 0
-            }*/
             numberOne = checkWroteNumber(it)
         }, label = {
             Text(text = "Primer Numero")
@@ -102,9 +127,99 @@ fun ArithmeticScreen(){
             Text(text = "Sumar")
         }
         Text(text = resultado)
+        Text(text="Resta")
+        TextField(value = numberOneResta.toString(), onValueChange ={
+            numberOneResta = checkWroteNumber(it)
+        }, label = {
+            Text(text = "Primer Numero")
+        }, placeholder = {
+            Text(text = "Por Favor escribe un número")
+        }, leadingIcon = {
+            Icon(imageVector = Icons.Default.Star, contentDescription = "Icono de Estrella")
+        }, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        OutlinedTextField(value = numberTwoResta.toString(), onValueChange ={
+            numberTwoResta = checkWroteNumber(it)
+        }, label = {
+            Text(text = "Segundo Numero")
+        }, placeholder = {
+            Text(text = "Por Favor escribe un número")
+        }, leadingIcon = {
+            Icon(imageVector = Icons.Default.Star, contentDescription = "Icono de Estrella")
+        }, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+        )
+        Button(onClick={
+            resultadoResta = (numberOneResta - numberTwoResta).toString()
 
+        }){
+            Text(text = "Restar")
+        }
+        Text(text = resultadoResta)
+
+        Text(text="División")
+        TextField(value = numberOneDiv.toString(), onValueChange ={
+            numberOneDiv = checkWroteNumber(it)
+        }, label = {
+            Text(text = "Primer Numero")
+        }, placeholder = {
+            Text(text = "Por Favor escribe un número")
+        }, leadingIcon = {
+            Icon(imageVector = Icons.Default.Star, contentDescription = "Icono de Estrella")
+        }, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        OutlinedTextField(value = numberTwoDiv.toString(), onValueChange ={
+            numberTwoDiv = checkWroteNumber(it)
+        }, label = {
+            Text(text = "Segundo Numero")
+        }, placeholder = {
+            Text(text = "Por Favor escribe un número")
+        }, leadingIcon = {
+            Icon(imageVector = Icons.Default.Star, contentDescription = "Icono de Estrella")
+        }, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+        )
+        Button(onClick={
+            resultadoDiv = (numberOneDiv / numberTwoDiv).toString()
+
+        }){
+            Text(text = "Dividir")
+        }
+        Text(text = resultadoDiv)
     }
+    Text(text="Multiplicación")
+    TextField(value = numberOneMulti.toString(), onValueChange ={
+        numberOneMulti = checkWroteNumber(it)
+    }, label = {
+        Text(text = "Primer Numero")
+    }, placeholder = {
+        Text(text = "Por Favor escribe un número")
+    }, leadingIcon = {
+        Icon(imageVector = Icons.Default.Star, contentDescription = "Icono de Estrella")
+    }, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+    )
+    Spacer(modifier = Modifier.height(16.dp))
+    OutlinedTextField(value = numberTwoMulti.toString(), onValueChange ={
+        numberTwoMulti = checkWroteNumber(it)
+    }, label = {
+        Text(text = "Segundo Numero")
+    }, placeholder = {
+        Text(text = "Por Favor escribe un número")
+    }, leadingIcon = {
+        Icon(imageVector = Icons.Default.Star, contentDescription = "Icono de Estrella")
+    }, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+    )
+    Button(onClick={
+        resultadoMulti = (numberOneMulti * numberTwoMulti).toString()
+
+    }){
+        Text(text = "Mutiplicar")
+    }
+    Text(text = resultadoMulti)
 }
+
+
+
 fun checkWroteNumber(text: String):Int{
     if (text.toIntOrNull() != null) {
         return text.toInt()
